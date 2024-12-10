@@ -1,22 +1,33 @@
-with 
+with
 
-source as (
+ source as (
 
     select * from {{ source('raw', 'ship') }}
 
+),
+
+diff_check as (
+
+  
+    select
+        orders_id,
+        shipping_fee,
+        shipping_fee_1
+        logcost,
+    from source
+    where shipping_fee <> shipping_fee_1 
 ),
 
 renamed as (
 
     select
         orders_id,
-        shipping_fee,
-        shipping_fee_1,
+        shipping_fee, 
         logcost,
-        ship_cost
-
+        cast(ship_cost as FLOAT64) as ship_cost 
     from source
 
 )
 
 select * from renamed
+
