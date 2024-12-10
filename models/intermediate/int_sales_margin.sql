@@ -23,7 +23,6 @@ joined_data AS (
         s.revenue,
         s.quantity,
         p.purchase_price,
-        -- Calculate purchase_cost
         s.quantity * p.purchase_price AS purchase_cost
     FROM sales_data s
     INNER JOIN product_data p
@@ -39,12 +38,9 @@ calculated_data AS (
         quantity,
         purchase_price,
         purchase_cost,
-        -- Calculate margin
         revenue - purchase_cost AS margin
     FROM joined_data
 )
 
--- Final Output
-SELECT * 
-FROM calculated_data;
+
 
