@@ -6,7 +6,7 @@ with
 
 ),
 
-diff_check as (
+ship_fee_check as (
 
   
     select
