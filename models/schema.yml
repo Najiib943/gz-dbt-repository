@@ -2,11 +2,69 @@ version: 2
 
 sources:
   - name: raw
-    schema: gz_raw_data       
+    schema: gz_raw_data
+    description: "This schema contains raw data from the sales, product, and shipping tables."
     tables:
-      - name: sales     
+      - name: sales
         identifier: raw_gz_sales
-      - name: product   
+        description: "Sales data containing orders, products, revenue, and quantities. One row per product in each order."
+        columns:
+          - name: orders_id
+            description: "The unique identifier for each order."
+            tests:
+              - not_null  # Ensures that 'orders_id' is not null
+          - name: pdt_id
+            description: "The unique identifier for each product in the order."
+            tests:
+              - not_null  # Ensures that 'pdt_id' is not null
+          - name: revenue
+            description: "The total revenue generated from the sale."
+          - name: quantity
+            description: "The quantity of items sold in the order."
+          - name: date_date
+            description: "The date when the order was placed."
+        tests:
+          # Composite Unique Test
+          - unique:
+              columns:
+                - orders_id
+                - pdt_id  # This ensures the combination of 'orders_id' and 'pdt_id' is unique
+          # Composite Not Null Test
+          - not_null:
+              columns:
+                - orders_id
+                - pdt_id  # Ensures that neither 'orders_id' nor 'pdt_id' is null
+
+      - name: product
         identifier: raw_gz_product
-      - name: ship      
+        description: "Products data containing product IDs, names, categories, and pricing information."
+        columns:
+          - name: products_id
+            description: "The unique identifier for each product."
+            tests:
+              - unique  # Ensures that 'products_id' is unique
+              - not_null  # Ensures that 'products_id' is not null
+          - name: purchse_price
+            description: "The purchase price of the product."
+          - name: product_name
+            description: "The name of the product."
+          - name: category
+            description: "The category of the product (e.g., Electronics, Clothing)."
+
+      - name: ship
         identifier: raw_gz_ship
+        description: "Shipping data containing order shipment details, shipping fees, and costs."
+        columns:
+          - name: orders_id
+            description: "The unique identifier for each order."
+            tests:
+              - unique  # Ensures that 'orders_id' is unique
+              - not_null  # Ensures that 'orders_id' is not null
+          - name: shipping_fee
+            description: "The shipping fee associated with the order."
+          - name: shipping_fee_1
+            description: "An alternative shipping fee, if applicable."
+          - name: logcost
+            description: "The cost associated with logging the shipment."
+          - name: ship_cost
+            description: "The total cost of shipping, including any additional fees."
