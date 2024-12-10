@@ -1,9 +1,7 @@
 with orders_margin as (
-
-    -- Use the int_orders_margin model for order-level margin data
     select
         orders_id,
-        order_date as date_date,  -- Rename for clarity
+        order_date as date_date,  
         total_margin as margin
     from {{ ref('int_orders_margin') }}
 
@@ -11,10 +9,9 @@ with orders_margin as (
 
 shipping_data as (
 
-    -- Use the stg_ship model for shipping-related data
     select
         orders_id,
-        cast(ship_cost as FLOAT64) as ship_cost,  -- Ensure ship_cost is numeric
+        cast(ship_cost as FLOAT64) as ship_cost,  
         shipping_fee,
         log_cost
     from {{ source('raw', 'ship') }}
@@ -23,7 +20,6 @@ shipping_data as (
 
 joined_data as (
 
-    -- Join orders_margin with shipping_data on orders_id
     select
         om.orders_id,
         om.date_date,
@@ -38,8 +34,6 @@ joined_data as (
 ),
 
 operational_margin_calc as (
-
-    -- Calculate operational margin
     select
         orders_id,
         date_date,

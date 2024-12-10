@@ -39,6 +39,7 @@ calculated_data AS (
         purchase_price,
         purchase_cost,
         revenue - purchase_cost AS margin
+
     FROM joined_data
 )
 
