@@ -1,11 +1,11 @@
 version: 2
 
 sources:
-  - name: raw           # Alias for the dataset (gz_raw_data → raw)
+  - name: raw          
     tables:
-      - name: sales     # Alias for the table (raw_gz_sales → sales)
+      - name: sales     
         identifier: raw_gz_sales
-      - name: product   # Alias for the table (raw_gz_product → product)
+      - name: product   
         identifier: raw_gz_product
-      - name: ship      # Alias for the table (raw_gz_ship → ship)
+      - name: ship      
         identifier: raw_gz_ship
