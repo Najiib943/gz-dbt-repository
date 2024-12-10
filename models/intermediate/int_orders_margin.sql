@@ -1,23 +1,12 @@
-with sales_margin as (
+ -- int_orders_margin.sql
 
-    select * 
-    from {{ ref('int_sales_margin') }}
-
-),
-
-aggregated_orders as (
-
-    select
-        orders_id,
-        min(date_date) as order_date,
-        sum(revenue) as total_revenue,
-        sum(purchase_cost) as total_purchase_cost,
-        sum(margin) as total_margin
-
-    from sales_margin
-    group by orders_id
-
-)
-
-select * 
-from aggregated_orders
+ SELECT
+     orders_id,
+     date_date,
+     ROUND(SUM(revenue),2) as revenue,
+     ROUND(SUM(quantity),2) as quantity,
+     ROUND(SUM(purchase_cost),2) as purchase_cost,
+     ROUND(SUM(margin),2) as margin
+ FROM {{ ref("int_sales_margin") }}
+ GROUP BY orders_id,date_date
+ ORDER BY orders_id DESC
