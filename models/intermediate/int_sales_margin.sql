@@ -1,5 +1,4 @@
 WITH 
--- Step 1: Fetch data from stg_sales
 sales_data AS (
     SELECT 
         orders_id,
@@ -10,7 +9,6 @@ sales_data AS (
 
 ),
 
--- Step 2: Fetch data from stg_product
 product_data AS (
     SELECT 
         products_id,
@@ -18,7 +16,6 @@ product_data AS (
     FROM {{ source('raw', 'product') }}
 ),
 
--- Step 3: Join the sales and product data
 joined_data AS (
     SELECT
         s.orders_id,
@@ -33,7 +30,7 @@ joined_data AS (
         ON s.products_id = p.products_id
 ),
 
--- Step 4: Calculate margin
+
 calculated_data AS (
     SELECT
         orders_id,
