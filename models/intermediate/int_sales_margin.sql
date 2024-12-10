@@ -5,15 +5,14 @@ sales_data AS (
         products_id,
         revenue,
         quantity
-    FROM {{ source('raw', 'sales') }}
-
+    FROM `galvanic-flame-442110-g0`.`gz_raw_data`.`raw_gz_sales`
 ),
 
 product_data AS (
     SELECT 
         products_id,
         purchase_price
-    FROM {{ source('raw', 'product') }}
+    FROM `galvanic-flame-442110-g0`.`gz_raw_data`.`raw_gz_product`
 ),
 
 joined_data AS (
@@ -29,7 +28,6 @@ joined_data AS (
         ON s.products_id = p.products_id
 ),
 
-
 calculated_data AS (
     SELECT
         orders_id,
@@ -39,9 +37,9 @@ calculated_data AS (
         purchase_price,
         purchase_cost,
         revenue - purchase_cost AS margin
-
     FROM joined_data
 )
+
 
 
 
