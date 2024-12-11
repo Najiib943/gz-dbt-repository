@@ -4,6 +4,15 @@ sources:
   - name: raw
     schema: gz_raw_data
     tables:
+      - name: adwords
+        identifier: raw_gz_adwords
+      - name: bing
+        identifier: raw_gz_bing
+      - name: criteo
+        identifier: raw_gz_criteo
+      - name: facebook
+        identifier: raw_gz_facebook
+
       - name: sales
         identifier: raw_gz_sales
         description: "Sales of Greenweez, one row per product_id found in each orders_id."
