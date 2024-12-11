@@ -2,20 +2,19 @@
 
 WITH adwords AS (
     SELECT *
-    FROM {{ref("stg_raw__adswords")}} 
+    FROM {{ ref('stg_raw__adwords') }}
 ),
 bing AS (
     SELECT *
-    FROM {{ref("stg_raw__bing")}} 
+    FROM {{ ref('stg_raw__bing') }}
 ),
 criteo AS (
     SELECT *
-    FROM {{ref("stg_raw__criteo")}} 
+    FROM {{ ref('stg_raw__criteo') }}
 ),
 facebook AS (
     SELECT *
-    FROM {{ref("stg_raw__facebook")}} 
- 
+    FROM {{ ref('stg_raw__facebook') }}
 )
 
 SELECT * FROM adwords
