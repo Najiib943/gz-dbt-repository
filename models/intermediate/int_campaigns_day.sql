@@ -1,5 +1,5 @@
 
-  SELECT
+ SELECT
     date_date,
     paid_source,
     campaign_key,
@@ -9,10 +9,11 @@
     SUM(click) AS total_click  -- Sum of clicks
 
  FROM {{ ref("int_campaigns") }}
-GROUP BY
-    date_date,
-    paid_source,
-    campaign_key,
-    campaign_name
- ORDER BY date_date DESC;
+ GROUP BY 
+    date_date,  -- Group by date_date
+    paid_source,  -- Group by paid_source
+    campaign_key,  -- Group by campaign_key
+    campaign_name  -- Group by campaign_name
+ ORDER BY date_date DESC
+ 
  
