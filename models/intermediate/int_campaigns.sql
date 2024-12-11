@@ -1,26 +1,17 @@
--- models/intermediate/int_campaigns.sql
+SELECT *
+FROM {{ ref('stg_raw__adwords') }}
 
-WITH adwords AS (
-    SELECT *
-    FROM {{ ref('stg_raw__adwords') }}
-),
-bing AS (
-    SELECT *
-    FROM {{ ref('stg_raw__bing') }}
-),
-criteo AS (
-    SELECT *
-    FROM {{ ref('stg_raw__criteo') }}
-),
-facebook AS (
-    SELECT *
-    FROM {{ ref('stg_raw__facebook') }}
-)
+UNION ALL
 
-SELECT * FROM adwords
+SELECT *
+FROM {{ ref('stg_raw__bing') }}
+
 UNION ALL
-SELECT * FROM bing
+
+SELECT *
+FROM {{ ref('stg_raw__criteo') }}
+
 UNION ALL
-SELECT * FROM criteo
-UNION ALL
-SELECT * FROM facebook;
+
+SELECT *
+FROM {{ ref('stg_raw__facebook') }}
